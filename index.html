@@ -6,6 +6,8 @@
 <title>Ark Vault — Your digital life, thoughtfully protected</title>
 <meta name="description" content="Discover, organise and prepare your digital legacy with Ark Vault, a privacy-minded browser-based prototype.">
 <meta name="theme-color" content="#102c39">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'none'; object-src 'none'; base-uri 'self'; form-action 'none'">
 <style>
 :root{--bg:#f4f6f8;--surface:#fff;--surface-2:#edf2f4;--ink:#12212b;--muted:#647581;--line:#dce4e8;--brand:#126b70;--brand-2:#0b5158;--accent:#d9f36a;--danger:#b54742;--success:#23734d;--shadow:0 18px 50px rgba(20,42,54,.08);color-scheme:light}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.65 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
@@ -21,8 +23,9 @@ label{display:block;font-size:.82rem;font-weight:650;color:#526570;margin:13px 0
 </head>
 <body>
 <main>
-<header class="brandbar"><div class="brand"><span class="brandmark" aria-hidden="true">⌑</span><span>ARK VAULT<small>Digital legacy, made manageable</small></span></div><span class="sub">Browser-based prototype</span></header>
-<section class="hero"><p class="eyebrow">A calmer way to prepare for the unexpected</p><h1>Your digital life deserves a thoughtful handover.</h1><p class="lead">Find the accounts that matter. Record what should be preserved. Prepare a secure handover for the people you trust.</p><div class="hero-foot"><span class="trust-chip">◈ Local-first workflow</span><span class="trust-chip">◈ Threshold-based sharing</span><span class="trust-chip">◈ No account sign-in required</span></div></section>
+<header class="brandbar"><div class="brand"><span class="brandmark" aria-hidden="true">⌑</span><span>ARK VAULT<small>Digital legacy, made manageable</small></span></div><span class="sub">Public beta · v0.1.0</span></header>
+<div class="note" role="note"><b>Public beta notice:</b> This is an experimental release, not a production-secure vault. Inventory details are stored unencrypted in this browser. Use sample data only; never enter passwords, recovery codes, financial details or identity documents.</div>
+<section class="hero"><p class="eyebrow">A calmer way to prepare for the unexpected</p><h1>Your digital life deserves a thoughtful handover.</h1><p class="lead">Find the accounts that matter. Record what should be preserved. Prepare a threshold-based handover for the people you trust.</p><div class="hero-foot"><span class="trust-chip">◈ Local-first workflow</span><span class="trust-chip">◈ Threshold-based sharing</span><span class="trust-chip">◈ No account sign-in required</span></div></section>
 <nav role="tablist">
 <button role="tab" aria-selected="true" data-t="how">Start here</button>
 <button role="tab" aria-selected="false" data-t="conn">1. Connect</button>
@@ -42,7 +45,7 @@ label{display:block;font-size:.82rem;font-weight:650;color:#526570;margin:13px 0
 <li><b>Connect.</b> Open the list of apps you signed in to with Google, Apple or Facebook, copy it, and paste it into Ark. Ark adds the accounts it recognises and asks you about the rest.</li>
 <li><b>Scan files (optional).</b> Add accounts you did not sign in to with those services by uploading a mail export or a browser password export.</li>
 <li><b>Inventory.</b> For each account, mark how important it is, what is at stake, and where your saved copy lives. Aim for a copy of every Irreplaceable account. The Save and convert tab turns exports into open formats and counts down shutdown dates.</li>
-<li><b>Lock and share.</b> Name 3 to 8 trusted people and choose how many must cooperate, for example 3 of 5. Ark produces one encrypted vault text and one piece for each person.</li>
+<li><b>Lock and share.</b> Name 2 to 8 trusted people and choose how many must cooperate, for example 3 of 5. Ark produces one encrypted vault text and one piece for each person.</li>
 <li><b>Hand over.</b> Send each person their piece by a different route. Keep the vault text somewhere safe, such as your cloud drive. Later, those people paste the vault text and enough pieces into step 5 to open it and read your guide.</li></ol>
 <div class="note">If you are a family member helping after a loss, go straight to step 5. You need the vault text and pieces from enough of the trusted people.</div></div>
 <div class="panel"><h2>Good to know</h2>
@@ -50,7 +53,7 @@ label{display:block;font-size:.82rem;font-weight:650;color:#526570;margin:13px 0
 <li><b>Your list stays in this browser.</b> Inventory data is saved in local storage on this device in readable form until you create a locked vault. Clear browser data or a different browser profile may make it unavailable.</li>
 <li><b>One piece alone is useless.</b> That is the safety feature. Do not keep all pieces in one place.</li>
 <li><b>Test it once.</b> Try opening the vault with your own pieces before you rely on it, then review every six months.</li>
-<li><b>Limits.</b> Ark does not bypass security or log in for anyone, does not send automatic alerts, and is not legal advice. Follow each provider’s official process for accounts after a death.</li></ul></div>
+<li><b>Limits.</b> Ark does not bypass security or log in for anyone, does not send automatic alerts, and is not legal advice. Follow each provider’s official process for accounts after a death.</li></ul><p><button class="btn alt" id="clearLocal">Clear Ark data from this browser</button></p><p class="sub">This removes Ark’s saved inventory and watch list from this browser profile. It cannot remove downloaded files, clipboard contents or copies stored elsewhere.</p></div>
 </section>
 <section id="conn" hidden>
 <div class="panel"><h2>Import from Google, Apple and Facebook</h2>
@@ -60,7 +63,7 @@ label{display:block;font-size:.82rem;font-weight:650;color:#526570;margin:13px 0
 </section>
 <section id="scan" hidden>
 <div class="panel"><h2>Find accounts from your own files</h2>
-<p class="sub">Accepts mail exports (.mbox, .eml, .txt) and a browser password export (.csv). Ark reads only sender domains, subject lines and site addresses. It never reads or keeps passwords.</p>
+<p class="sub">Accepts mail exports (.mbox, .eml, .txt) and browser password-export CSV files. Ark reads sender domains, subject lines and site addresses only; it does not use the password column. Use sample or non-sensitive data in this public beta.</p>
 <label for="files">Choose files</label><input type="file" id="files" multiple accept=".mbox,.eml,.txt,.csv">
 <label for="paste">Or paste sender addresses, subjects or website addresses, one per line</label>
 <textarea id="paste" placeholder="welcome@notion.so  Welcome to Notion&#10;orders@zomato.com  Your receipt&#10;https://www.dropbox.com/login"></textarea>
@@ -75,7 +78,7 @@ label{display:block;font-size:.82rem;font-weight:650;color:#526570;margin:13px 0
 
 <section id="lock" hidden>
 <div class="panel"><h2>Lock your inventory</h2>
-<p class="sub">Ark encrypts your inventory with a random passphrase, then splits that passphrase into pieces for the people you trust. The encrypted text is useless alone, so you can store it anywhere.</p>
+<p class="sub">Ark encrypts your inventory with a random passphrase, then splits that passphrase into threshold shares. The number of shares required is printed on every share. This prototype has not been independently security-audited.</p>
 <label for="owner">Your name</label><input type="text" id="owner" placeholder="Asha Verma">
 <label for="people">Trusted people, one per line: name, how to reach them</label>
 <textarea id="people" placeholder="Ravi, 98xxxxxx01&#10;Meera, meera@example.com&#10;Dr. Khan, 98xxxxxx22"></textarea>
@@ -132,6 +135,7 @@ function reg(h){h=h.toLowerCase().replace(/^www\./,'');const p=h.split('.');if(p
 let S={accounts:[]};
 try{const s=JSON.parse(localStorage.getItem('ark-vault')||'null');if(s&&Array.isArray(s.accounts))S=s;}catch(e){}
 const save=()=>{try{localStorage.setItem('ark-vault',JSON.stringify(S));}catch(e){}};
+$('clearLocal').onclick=()=>{if(!window.confirm('Clear the Ark Vault inventory and watch list saved in this browser? This cannot remove downloaded or copied files.'))return;try{localStorage.removeItem('ark-vault');}catch(e){}S={accounts:[]};drawInv();drawWatch();};
 function addAcc(domain,hits){domain=reg(domain);if(!domain||SKIP.has(domain))return false;let a=S.accounts.find(x=>x.domain===domain);if(a){a.hits+=hits;return false;}
  const k=K[domain];S.accounts.push({domain,name:k?k[0]:domain,hits,level:k?k[1]:1,status:0,note:'',where:'',legacy:k?k[2]:''});return true;}
 
@@ -161,13 +165,15 @@ function score(){const w=[3,2,1],t=S.accounts.reduce((x,a)=>x+w[a.level],0),s=S.
  $('score').textContent=p+'%';$('scoreTxt').textContent=t?(o?o+' irreplaceable account'+(o>1?'s have':' has')+' no saved copy yet.':'Every irreplaceable account has a saved copy.'):'Add accounts in step 1 or below.';}
 $('add').onclick=()=>{const v=$('addName').value.trim();if(!v)return;const d=v.includes('.')?v:v.toLowerCase().replace(/\W+/g,'')+'.local';addAcc(d,0);const a=S.accounts.find(x=>x.domain===reg(d));if(a&&!K[reg(d)])a.name=v;$('addName').value='';save();drawInv();};
 
-// ----- Shamir over GF(256)
+// ----- Shamir secret sharing over GF(256), primitive polynomial 0x11d
+// The 0x11d field polynomial with generator 0x02 yields all 255 non-zero elements.
 const EXP=new Uint8Array(512),LOG=new Uint8Array(256);
-(()=>{let x=1;for(let i=0;i<255;i++){EXP[i]=x;LOG[x]=i;let y=x<<1;if(y&256)y^=283;x=(y^x)&255;}for(let i=255;i<512;i++)EXP[i]=EXP[i-255];})();
-const mul=(a,b)=>a&&b?EXP[LOG[a]+LOG[b]]:0,dv=(a,b)=>a?EXP[LOG[a]+255-LOG[b]]:0;
-function split(bytes,n,k){const sh=Array.from({length:n},(_,i)=>({x:i+1,y:new Uint8Array(bytes.length)}));
- bytes.forEach((b,p)=>{const c=new Uint8Array(k);c[0]=b;crypto.getRandomValues(c.subarray(1));sh.forEach(s=>{let v=0;for(let j=k-1;j>=0;j--)v=mul(v,s.x)^c[j];s.y[p]=v;});});return sh;}
-function combine(sh){const o=new Uint8Array(sh[0].y.length);for(let p=0;p<o.length;p++){let a=0;sh.forEach((si,i)=>{let l=1;sh.forEach((sj,j)=>{if(i!==j)l=mul(l,dv(sj.x,si.x^sj.x));});a^=mul(si.y[p],l);});o[p]=a;}return o;}
+(()=>{let x=1;for(let i=0;i<255;i++){EXP[i]=x;LOG[x]=i;x<<=1;if(x&0x100)x^=0x11d;}for(let i=255;i<512;i++)EXP[i]=EXP[i-255];})();
+const mul=(a,b)=>a&&b?EXP[LOG[a]+LOG[b]]:0;
+const dv=(a,b)=>{if(!b)throw new Error('Invalid share coordinates');return a?EXP[LOG[a]+255-LOG[b]]:0;};
+function split(bytes,n,k){if(!(k>=2&&k<=n&&n<=255))throw new Error('Invalid sharing threshold');const sh=Array.from({length:n},(_,i)=>({x:i+1,y:new Uint8Array(bytes.length)}));
+ bytes.forEach((b,p)=>{const c=new Uint8Array(k);c[0]=b;if(k>1)crypto.getRandomValues(c.subarray(1));sh.forEach(s=>{let v=0;for(let j=k-1;j>=0;j--)v=mul(v,s.x)^c[j];s.y[p]=v;});});return sh;}
+function combine(sh){if(!Array.isArray(sh)||sh.length<2)throw new Error('Not enough shares');const len=sh[0].y.length,seen=new Set();for(const s of sh){if(!Number.isInteger(s.x)||s.x<1||s.x>255||!(s.y instanceof Uint8Array)||s.y.length!==len||seen.has(s.x))throw new Error('Invalid or duplicate share');seen.add(s.x);}const o=new Uint8Array(len);for(let p=0;p<o.length;p++){let a=0;sh.forEach((si,i)=>{let l=1;sh.forEach((sj,j)=>{if(i!==j)l=mul(l,dv(sj.x,si.x^sj.x));});a^=mul(si.y[p],l);});o[p]=a;}return o;}
 const hex=u=>[...u].map(b=>b.toString(16).padStart(2,'0')).join('');
 
 // ----- crypto: PBKDF2 -> AES-GCM
@@ -182,18 +188,19 @@ $('people').oninput=fillK;
 $('seal').onclick=async()=>{const P=people().slice(0,8),out=$('sealOut');
  if(P.length<2){out.innerHTML='<p class="bad">Add at least two trusted people.</p>';return;}
  if(!S.accounts.length){out.innerHTML='<p class="bad">Your inventory is empty. Add accounts first.</p>';return;}
- const k=Math.min(+$('k').value||2,P.length),al='abcdefghjkmnpqrstuvwxyz23456789',r=crypto.getRandomValues(new Uint8Array(24)),pass=[...r].map(b=>al[b%al.length]).join('');
+ const k=Math.min(+$('k').value||2,P.length),pass=randomPassphrase();
  const data={v:1,owner:$('owner').value||'Unnamed',created:new Date().toISOString().slice(0,10),threshold:k,people:P,accounts:S.accounts};
  const blob=await seal(pass,data),sh=split(enc(pass),P.length,k);
  out.innerHTML='<p class="ok">Locked. Any '+k+' of '+P.length+' pieces can open it.</p><label>Encrypted vault (safe to store in cloud drive or email)</label><textarea id="blobOut" readonly>'+blob+'</textarea><button class="btn alt" data-copy="blobOut">Copy vault</button><h2 style="margin-top:18px">Pieces</h2><p class="sub">Send each piece to its person through a different channel. Do not keep them together.</p>';
- sh.forEach((s,i)=>{const d=document.createElement('div');d.className='piece';const id='pc'+i;d.innerHTML='<b>'+esc(P[i].name)+'</b> <span class="sub">'+esc(P[i].contact)+'</span><code id="'+id+'">ARK-S-'+hex([s.x])+hex(s.y)+'</code><button class="btn alt" data-copy="'+id+'">Copy piece</button>';out.append(d);});};
+ sh.forEach((s,i)=>{const d=document.createElement('div');d.className='piece';const id='pc'+i;d.innerHTML='<b>'+esc(P[i].name)+'</b> <span class="sub">'+esc(P[i].contact)+'</span><code id="'+id+'">ARK-S1-'+k+'-'+hex([s.x])+hex(s.y)+'</code><button class="btn alt" data-copy="'+id+'">Copy piece</button>';out.append(d);});};
 
 $('open').onclick=async()=>{const m=$('recMsg');m.innerHTML='';$('guideBox').hidden=true;
- try{const sh=$('pieces').value.split('\n').map(l=>l.trim().replace(/^ARK-S-/,'')).filter(Boolean).map(h=>{if(!/^([0-9a-f]{2})+$/i.test(h)||h.length<4)throw new Error('piece');const u=Uint8Array.from(h.match(/../g).map(x=>parseInt(x,16)));return{x:u[0],y:u.slice(1)};});
-  if(sh.length<2)throw new Error('few');if(new Set(sh.map(s=>s.y.length)).size>1||new Set(sh.map(s=>s.x)).size<sh.length)throw new Error('piece');
+ try{const parsed=$('pieces').value.split('\n').map(l=>l.trim()).filter(Boolean).map(line=>{const m=line.match(/^ARK-S1-(\d+)-([0-9a-f]+)$/i);if(!m||!/^([0-9a-f]{2})+$/i.test(m[2])||m[2].length<4)throw new Error('piece');const u=Uint8Array.from(m[2].match(/../g).map(x=>parseInt(x,16)));return{k:Number(m[1]),x:u[0],y:u.slice(1)};});
+  if(!parsed.length)throw new Error('few');const threshold=parsed[0].k;if(!Number.isInteger(threshold)||threshold<2||parsed.some(s=>s.k!==threshold))throw new Error('threshold');if(parsed.length<threshold)throw new Error('few');
+  const sh=parsed.map(({x,y})=>({x,y}));if(new Set(sh.map(s=>s.y.length)).size>1||new Set(sh.map(s=>s.x)).size<sh.length)throw new Error('piece');
   const data=await unseal(new TextDecoder().decode(combine(sh)),$('blob').value);
   m.innerHTML='<p class="ok">Vault opened.</p>';$('guide').value=makeGuide(data);$('guideBox').hidden=false;}
- catch(e){m.innerHTML='<p class="bad">Could not open the vault.</p><p class="sub">Either too few pieces were entered, a piece has a typo, or the vault text is incomplete. The lock gives no hints about which.</p>';}};
+ catch(e){m.innerHTML='<p class="bad">Could not open the vault.</p><p class="sub">Enter at least the required number of matching ARK-S1 pieces. A piece may be mistyped, duplicated, or from a different vault.</p>';}};
 
 function makeGuide(d){const due=new Date(d.created);due.setDate(due.getDate()+180);const L=['WHERE EVERYTHING IS','Prepared by '+d.owner+' on '+d.created+'. Review due by '+due.toISOString().slice(0,10)+'.','','TRUSTED PEOPLE (any '+d.threshold+' of them can open the vault)'];
  d.people.forEach(p=>L.push('- '+p.name+(p.contact?' ('+p.contact+')':'')));L.push('','ACCOUNTS, MOST IMPORTANT FIRST');
@@ -237,7 +244,7 @@ function svc(names,file){const t=names.join('\n');
  if(/icloud|apple/i.test(t))return{d:'apple.com',n:'Apple / iCloud'};
  const b=file.replace(/\.zip$/i,'');return{d:(b.toLowerCase().replace(/\W+/g,'')||'export')+'.local',n:b};}
 function noteMd(x){let body=x.textContent||x.body||x.text||'';if(Array.isArray(x.listContent))body=x.listContent.map(i=>'- ['+(i.isChecked?'x':' ')+'] '+(i.text||'')).join('\n');if(!body&&!x.title)return '';const d=x.createdTimestampUsec?new Date(x.createdTimestampUsec/1000).toISOString().slice(0,10):'';return '# '+(x.title||'Untitled')+'\n'+(d?'*Saved from '+d+'*\n':'')+'\n'+body;}
-async function readZip(file){const zip=await JSZip.loadAsync(file),es=Object.values(zip.files).filter(e=>!e.dir),s=svc(es.map(e=>e.name),file.name);
+async function readZip(file){if(file.size>100*1024*1024)throw new Error('ZIP exceeds the 100 MB compressed-file limit');const zip=await JSZip.loadAsync(file),es=Object.values(zip.files).filter(e=>!e.dir);if(es.length>5000)throw new Error('ZIP contains more than 5,000 files');let total=0;for(const e of es){const n=(e._data&&e._data.uncompressedSize)||0;total+=n;if(n>100*1024*1024)throw new Error('An individual ZIP entry exceeds 100 MB');}if(total>500*1024*1024)throw new Error('ZIP expands beyond the 500 MB total limit');const s=svc(es.map(e=>e.name),file.name);
  const cnt={photo:0,video:0,doc:0,data:0,contact:0,other:0},folders={};let bytes=0;
  for(const e of es){bytes+=(e._data&&e._data.uncompressedSize)||0;let k='other';for(const t in EXT)if(EXT[t].test(e.name)){k=t;break;}cnt[k]++;const p=e.name.split('/').slice(0,s.d==='google.com'?2:1).join('/');folders[p]=(folders[p]||0)+1;}
  const notes=[],vcf=[];
@@ -266,6 +273,7 @@ dz.addEventListener('drop',e=>handleZips(e.dataTransfer.files));
 
 // ----- second copies and restore (uses the downloads capability)
 const AL='abcdefghjkmnpqrstuvwxyz23456789';
+function randomPassphrase(length=24){let out='';while(out.length<length){const bytes=crypto.getRandomValues(new Uint8Array(64));for(const b of bytes){if(b>=Math.floor(256/AL.length)*AL.length)continue;out+=AL[b%AL.length];if(out.length===length)break;}}return out;}
 async function saveFile(name,data){
  const blob=data instanceof Blob?data:new Blob([data],{type:'application/octet-stream'});
  const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;a.rel='noopener';document.body.appendChild(a);a.click();a.remove();
@@ -276,7 +284,7 @@ async function encBytes(buf,pass){const salt=crypto.getRandomValues(new Uint8Arr
 async function decBytes(u,pass){if(new TextDecoder().decode(u.slice(0,5))!=='ARKC1')throw new Error('This is not an Ark encrypted copy.');try{return new Uint8Array(await crypto.subtle.decrypt({name:'AES-GCM',iv:u.slice(21,33)},await dk(pass,u.slice(5,21)),u.slice(33)));}catch(e){throw new Error('Wrong passphrase, or the file is damaged.');}}
 function addCopyUI(d,r,f){const p=document.createElement('p'),b=document.createElement('button'),m=document.createElement('div');b.className='btn';b.textContent='Save encrypted second copy';m.className='sub';m.setAttribute('aria-live','polite');p.append(b);d.append(p,m);
  b.onclick=async()=>{b.disabled=true;m.textContent='Encrypting...';
-  try{const pass=[...crypto.getRandomValues(new Uint8Array(24))].map(x=>AL[x%AL.length]).join(''),day=new Date().toISOString().slice(0,10),ct=await encBytes(await f.arrayBuffer(),pass),z=new JSZip();
+  try{const pass=randomPassphrase(24),day=new Date().toISOString().slice(0,10),ct=await encBytes(await f.arrayBuffer(),pass),z=new JSZip();
    z.file('copy.enc',ct);z.file('manifest.json',JSON.stringify({tool:'Ark Vault',service:r.s.n,original:f.name,created:day,files:r.files}));
    z.file('README.txt','This is an encrypted backup made by Ark Vault.\nIt is AES-256-GCM encrypted and cannot be opened without its passphrase.\nTo restore it: open Ark Vault, go to Drop export, and use Restore a second copy.\n');
    const name='ark-copy-'+(r.s.n.toLowerCase().replace(/\W+/g,'-'))+'-'+day+'.zip';await saveFile(name,await z.generateAsync({type:'blob',compression:'STORE'}));
@@ -284,7 +292,7 @@ function addCopyUI(d,r,f){const p=document.createElement('p'),b=document.createE
    m.innerHTML='<span class="ok">Second copy saved as '+esc(name)+'.</span><p><b>Backup passphrase (shown once):</b></p><code>'+pass+'</code><p class="sub">Store this passphrase separately from the encrypted backup. It is not saved in Ark Vault.</p>';}
   catch(e){m.innerHTML='<span class="bad">'+esc(e.code==='declined'?'You declined the save, so nothing was saved.':(e.message||'Could not save the copy.'))+'</span>';b.disabled=false;}};}
 $('rsGo').onclick=async()=>{const m=$('rsMsg'),f=$('rsFile').files[0],pass=$('rsPass').value.trim();if(!f||!pass){m.innerHTML='<span class="bad">Choose the copy file and enter its passphrase.</span>';return;}
- try{if(typeof JSZip==='undefined')throw new Error('The unzip library did not load.');const z=await JSZip.loadAsync(f),e=z.file('copy.enc');if(!e)throw new Error('This is not an Ark copy file.');let man={};try{man=JSON.parse(await z.file('manifest.json').async('string'));}catch(x){}
+ try{if(typeof JSZip==='undefined')throw new Error('The unzip library did not load.');if(f.size>110*1024*1024)throw new Error('Encrypted copy exceeds the 110 MB limit.');const z=await JSZip.loadAsync(f),e=z.file('copy.enc');if(!e)throw new Error('This is not an Ark copy file.');let man={};try{man=JSON.parse(await z.file('manifest.json').async('string'));}catch(x){}
   const plain=await decBytes(await e.async('uint8array'),pass);await saveFile((man.original||'export.zip').replace(/\.zip$/i,'')+'-restored.zip',plain);m.innerHTML='<span class="ok">Restored. Your original export was offered for saving.</span>';}
  catch(err){m.innerHTML='<span class="bad">'+esc(err.code==='declined'?'You declined the save.':err.message)+'</span>';}};
 document.addEventListener('click',async e=>{const s=e.target.dataset&&e.target.dataset.save;if(!s)return;const [id,name]=s.split('|');try{await saveFile(name,$(id).value);$('dropMsg').innerHTML='<p class="ok">Saved '+esc(name)+'.</p>';}catch(err){$('dropMsg').innerHTML='<p class="bad">'+esc(err.code==='declined'?'You declined the save.':err.message)+'</p>';}});

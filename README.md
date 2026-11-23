@@ -2,63 +2,77 @@
 
 **Your digital life deserves a thoughtful handover.**
 
-Ark Vault is a browser-based prototype for discovering digital accounts, organising what matters, recording preservation steps, and preparing a threshold-based handover to trusted people.
+Ark Vault is a browser-based digital-legacy planning prototype. It helps people discover accounts, organise preservation priorities, inspect personal data exports and prepare a threshold-based handover guide for trusted contacts.
 
-> **Prototype / security notice:** This repository is an experimental starting point, not a production-ready digital-legacy or password-management service. Do not use it to store passwords, recovery codes, financial credentials, identity documents, or other high-risk secrets. The cryptographic workflow has not undergone an independent security audit.
+> [!WARNING]
+> **Public beta — not production-secure.** Inventory data is stored in browser `localStorage` without encryption. The cryptographic workflow has not been independently audited. Use synthetic/sample data only. Never enter passwords, recovery codes, financial credentials, identity documents or other sensitive personal information.
 
-## What it currently does
+## What this beta includes
 
-- Import candidate accounts from copied Google, Apple and Meta app lists.
-- Scan selected mail exports and browser CSV exports for account-related domains (the CSV scanner reads the `url` column only).
-- Maintain a local account inventory with importance, backup status, notes and provider guidance.
-- Encrypt an inventory export using PBKDF2-HMAC-SHA-256 and AES-256-GCM.
-- Split the encryption passphrase into threshold shares using a Shamir-style GF(256) implementation.
-- Inspect ZIP export contents, extract supported notes/contact data, create encrypted second-copy ZIPs and restore them.
-- Convert selected JSON/CSV data into Markdown, vCard or CSV, and track manually entered shutdown dates.
+- Guided manual import of candidate accounts from copied Google, Apple and Meta lists.
+- Scanning of selected email exports and browser CSV exports for domains and site URLs. The browser CSV scanner reads the `url` column, not password columns.
+- A local inventory with importance, backup status, notes and provider guidance.
+- An encrypted inventory export using PBKDF2-HMAC-SHA-256 and AES-256-GCM.
+- A Shamir-style threshold share workflow over GF(256), with versioned share strings and threshold checks. Share codes from older prototype builds must be regenerated; see [release notes](RELEASE-NOTES.md).
+- ZIP export inspection, supported notes/contact extraction, encrypted second-copy creation and restore.
+- JSON/CSV conversion to Markdown, vCard or CSV, plus manually maintained shutdown dates.
 
 ## Run locally
 
 1. Download or clone this repository.
 2. Open `index.html` in a modern browser, preferably through a local static server.
-3. Use a test dataset only. Do not use real credentials or sensitive personal data.
+3. Use synthetic/sample data only.
 
-No build step is required. JSZip is loaded from cdnjs at runtime for ZIP handling, so that feature needs an internet connection. Other features use browser APIs such as Web Crypto, localStorage and Blob downloads. Web Crypto generally requires a secure context (`https://` or `localhost`).
+No build step is required. ZIP functionality loads JSZip 3.10.1 from cdnjs and therefore requires an internet connection. Web Crypto generally requires a secure context (`https://` or `localhost`).
+
+## Tests
+
+Requires Node.js 22 or later:
+
+```bash
+node --test tests/crypto.test.cjs
+```
+
+The test suite checks GF(256) field coverage, threshold-sized share reconstruction, invalid thresholds and duplicate share rejection. GitHub Actions runs these checks and validates inline JavaScript syntax on pushes and pull requests.
+
+These tests are not a substitute for an independent cryptographic audit or browser end-to-end testing.
 
 ## Publish with GitHub Pages
 
-1. Create a new GitHub repository named `ark-vault`.
+1. Create a GitHub repository named `ark-vault`.
 2. Upload the contents of this folder, keeping `index.html` at the repository root.
 3. Open **Settings → Pages**.
 4. Under **Build and deployment**, choose **Deploy from a branch**.
 5. Select branch `main` and folder `/(root)`, then save.
-6. Wait for deployment. Your site will be available at `https://YOUR-USERNAME.github.io/ark-vault/`.
+6. After deployment, the site will be available at `https://YOUR-USERNAME.github.io/ark-vault/`.
 
-For an initial review, consider making the repository **Private**. Make it public only when you are comfortable sharing the source code and its current security limitations.
+See the [GitHub Pages quickstart](https://docs.github.com/en/pages/quickstart).
 
-## Data and privacy model
+## Privacy and security model
 
-- The app does not send selected files to an Ark backend; there is no Ark backend in this prototype.
-- The page loads JSZip 3.10.1 from cdnjs, which means the browser contacts that CDN to retrieve the library.
-- Inventory state is stored in browser `localStorage` and is not encrypted at rest. Anyone with access to the same browser profile may be able to inspect it.
-- The encrypted vault uses AES-GCM, with a key derived by PBKDF2 (150,000 iterations, SHA-256). This is a prototype parameter set, not a substitute for a reviewed key-management design.
-- Backup-file passphrases are displayed once after creation and are not stored in the inventory. Keep each passphrase separately from its encrypted backup.
-- Browser downloads, clipboard permissions, memory limits, browser extensions and device compromise are outside the app's control.
+- There is no Ark backend, account system, telemetry service or cloud sync in this prototype.
+- Selected files are processed in the browser and are not uploaded by the app.
+- The page loads JSZip from cdnjs, so the browser contacts that CDN to retrieve the library.
+- Inventory state is saved in browser `localStorage` in readable, unencrypted form. Anyone with access to the same browser profile or scripts running on the same origin may be able to inspect it.
+- The encrypted vault uses AES-GCM with a PBKDF2-derived key (150,000 SHA-256 iterations). These parameters and the overall design need independent review.
+- Backup passphrases are shown once after creating an encrypted copy and are not saved in the inventory. Keep them separately from the encrypted file.
+- Browser extensions, malware, shared devices, clipboard history, download folders and device backups are outside this prototype's protection.
 
-Read [`docs/SECURITY-REVIEW.md`](docs/SECURITY-REVIEW.md) and [`docs/PRIVACY.md`](docs/PRIVACY.md) before testing.
-
-## Roadmap before a public launch
-
-- Independent cryptography and threat-model review; add test vectors for share generation/reconstruction.
-- Encrypt local persistence by default and design safe key lifecycle / recovery.
-- Add automated tests, accessibility checks, dependency pinning/SRI, and a content-security policy.
-- Add ZIP bomb limits, file-size limits and robust malformed-input handling.
-- Separate UI, domain logic and crypto into testable modules; add CI and release/versioning.
-- Review provider-specific legacy instructions and legal/privacy obligations in target markets.
+Read [`docs/PRIVACY.md`](docs/PRIVACY.md), [`docs/SECURITY-REVIEW.md`](docs/SECURITY-REVIEW.md) and [`docs/GO-LIVE-CHECKLIST.md`](docs/GO-LIVE-CHECKLIST.md) before testing.
 
 ## Project status
 
-Early prototype. Features are provided as-is and may change. There is no hosted account system, automatic monitoring, email delivery, cloud sync or legal authority to transfer third-party accounts.
+**v0.1.0 public beta / feedback release.** This project is not a password manager, does not verify a person's identity or legal authority, does not bypass provider security, and does not automatically monitor service shutdowns. It is not legal advice and should not be relied on as the sole copy of a digital-legacy plan.
+
+## Roadmap before production use
+
+- Independent threat-model, cryptographic and penetration reviews.
+- Encrypt local persistence by default and define key lifecycle, lock, recovery, rotation, revocation and deletion.
+- Add comprehensive browser tests and cross-version recovery tests.
+- Self-host JSZip or add verified Subresource Integrity; strengthen and validate the Content Security Policy.
+- Harden archive processing and test malicious archives.
+- Complete accessibility, privacy and jurisdiction-specific legal reviews.
 
 ## License
 
-No open-source license has been selected yet. Unless a license is added, normal copyright rules apply; viewing or forking this repository does not automatically grant permission to redistribute or reuse it. Choose a license before inviting outside contributions.
+No license has been selected. Unless a license is added, normal copyright rules apply; viewing or forking this repository does not automatically grant permission to redistribute or reuse it.
