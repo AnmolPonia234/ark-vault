@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ark Vault — Your digital life, thoughtfully protected</title>
+<meta name="description" content="Discover, organise and prepare your digital legacy with Ark Vault, a privacy-minded browser-based prototype.">
+<meta name="theme-color" content="#102c39">
+<style>
+:root{--bg:#f4f6f8;--surface:#fff;--surface-2:#edf2f4;--ink:#12212b;--muted:#647581;--line:#dce4e8;--brand:#126b70;--brand-2:#0b5158;--accent:#d9f36a;--danger:#b54742;--success:#23734d;--shadow:0 18px 50px rgba(20,42,54,.08);color-scheme:light}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.65 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:1160px;margin:0 auto;padding:30px 26px 72px}
+.brandbar{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:0 0 34px}.brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:-.04em;font-size:1.16rem}.brandmark{width:38px;height:38px;border-radius:12px;background:var(--brand);display:grid;place-items:center;color:white;font-size:20px;box-shadow:0 7px 18px rgba(18,107,112,.22)}.brand small{display:block;color:var(--muted);font-size:.68rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;margin-top:-3px}
+.hero{position:relative;overflow:hidden;background:linear-gradient(125deg,#102c39 0%,#155c62 70%,#18747a 100%);color:#f7fbfc;border-radius:26px;padding:clamp(28px,5vw,58px);box-shadow:var(--shadow);margin-bottom:26px}.hero:after{content:"";position:absolute;width:320px;height:320px;border:1px solid rgba(217,243,106,.22);border-radius:50%;right:-95px;top:-125px;box-shadow:0 0 0 32px rgba(217,243,106,.035),0 0 0 72px rgba(217,243,106,.025)}.eyebrow{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;font-weight:800;color:var(--accent);margin:0 0 14px}.hero h1{font-size:clamp(2.35rem,5vw,4.2rem);line-height:1.02;letter-spacing:-.065em;max-width:760px;margin:0 0 18px;font-weight:780}.hero .lead{color:#d2e1e5;font-size:clamp(1rem,1.7vw,1.18rem);max-width:720px;margin:0}.hero-foot{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px}.trust-chip{border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.08);border-radius:99px;padding:7px 12px;font-size:.78rem;color:#e6f0f1}
+nav{display:flex;gap:7px;overflow-x:auto;padding:8px;background:#e8eef0;border:1px solid var(--line);border-radius:15px;margin:0 0 24px;scrollbar-width:thin}nav button{border:0;background:transparent;color:var(--muted);font:600 .86rem/1.2 system-ui,sans-serif;padding:11px 14px;border-radius:10px;white-space:nowrap;cursor:pointer;transition:.18s}nav button:hover{background:#fff;color:var(--ink)}nav button[aria-selected=true]{background:var(--brand);color:white;box-shadow:0 5px 12px rgba(18,107,112,.18)}
+:focus-visible{outline:3px solid #9abf35;outline-offset:3px}h2{font-size:1.28rem;letter-spacing:-.035em;line-height:1.25;margin:0 0 12px}h3{font-size:1rem;margin:0 0 8px}.panel{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:clamp(18px,3vw,26px);margin-bottom:18px;box-shadow:0 5px 18px rgba(20,42,54,.035)}.panel p{margin-top:7px}.sub,.lead{color:var(--muted)}.sub{font-size:.87rem}.note{border-left:3px solid var(--brand);background:#f0f7f6;border-radius:0 10px 10px 0;padding:12px 15px;margin:16px 0;color:#36555b}.steps{padding-left:22px}.steps li{padding:3px 0}.btn{background:var(--brand);color:white;border:1px solid var(--brand);border-radius:10px;padding:10px 16px;font:650 .9rem system-ui,sans-serif;cursor:pointer;transition:.18s}.btn:hover{background:var(--brand-2);transform:translateY(-1px)}.btn:disabled{opacity:.55;cursor:not-allowed;transform:none}.btn.alt{background:white;color:var(--brand);border-color:#b8ced0}.btn.alt:hover{background:#edf7f6}
+label{display:block;font-size:.82rem;font-weight:650;color:#526570;margin:13px 0 5px}textarea,input[type=text],input[type=date],input[type=file],select{width:100%;background:#fbfcfd;color:var(--ink);border:1px solid #cbd7dc;border-radius:10px;padding:10px 12px;font:inherit}textarea{font:.82rem/1.55 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;min-height:110px}input:focus,textarea:focus,select:focus{border-color:var(--brand);outline:3px solid rgba(18,107,112,.12)}.g{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}.acc,.piece,.prov{border:1px solid var(--line);border-radius:13px;padding:14px;margin:10px 0;background:#fcfdfd}.acc b{font-size:1rem}.acc .g{margin-top:6px}.piece code{display:block;font:.76rem ui-monospace,Menlo,monospace;word-break:break-all;margin:8px 0}.ok{color:var(--success);font-weight:700}.bad{color:var(--danger);font-weight:700}.score{font-size:3rem;line-height:1;font-weight:800;letter-spacing:-.06em;color:var(--brand)}.drop{border:2px dashed #83aeb0;border-radius:15px;padding:36px 16px;text-align:center;cursor:pointer;background:#f6faf9;transition:.2s}.drop:hover,.drop.over{background:#eaf5f3;border-color:var(--brand);border-style:solid}.cand label{display:flex;gap:8px;align-items:center;color:var(--ink)}.cand input{width:auto}.prov{background:#fbfcfd}@media(max-width:640px){main{padding:18px 14px 50px}.brandbar{margin-bottom:20px}.hero{border-radius:19px}.panel{border-radius:14px}nav{border-radius:12px}nav button{padding:10px 12px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}}@media print{body{background:#fff}main{padding:0}.brandbar,nav,.noprint,.hero{display:none!important}.panel{box-shadow:none;break-inside:avoid}}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+</head>
+<body>
+<main>
+<header class="brandbar"><div class="brand"><span class="brandmark" aria-hidden="true">⌑</span><span>ARK VAULT<small>Digital legacy, made manageable</small></span></div><span class="sub">Browser-based prototype</span></header>
+<section class="hero"><p class="eyebrow">A calmer way to prepare for the unexpected</p><h1>Your digital life deserves a thoughtful handover.</h1><p class="lead">Find the accounts that matter. Record what should be preserved. Prepare a secure handover for the people you trust.</p><div class="hero-foot"><span class="trust-chip">◈ Local-first workflow</span><span class="trust-chip">◈ Threshold-based sharing</span><span class="trust-chip">◈ No account sign-in required</span></div></section>
+<nav role="tablist">
+<button role="tab" aria-selected="true" data-t="how">Start here</button>
+<button role="tab" aria-selected="false" data-t="conn">1. Connect</button>
+<button role="tab" aria-selected="false" data-t="scan">2. Scan files</button>
+<button role="tab" aria-selected="false" data-t="inv">3. Inventory</button>
+<button role="tab" aria-selected="false" data-t="lock">4. Lock and share</button>
+<button role="tab" aria-selected="false" data-t="rec">5. Open and guide</button>
+<button role="tab" aria-selected="false" data-t="drop">Drop export</button>
+<button role="tab" aria-selected="false" data-t="save">Save and convert</button>
+</nav>
+
+<section id="how">
+<div class="panel"><h2>What Ark Vault does</h2>
+<p>Many of your important things live inside online accounts: photos, documents, recipes, customer records. If you die, lose access, or a company shuts down, your family may not even know those accounts exist. Ark Vault helps you list them, record where your copies are, and lock that list so only a group of people you trust can open it together.</p>
+<h2 style="margin-top:16px">How to use it</h2>
+<ol class="steps">
+<li><b>Connect.</b> Open the list of apps you signed in to with Google, Apple or Facebook, copy it, and paste it into Ark. Ark adds the accounts it recognises and asks you about the rest.</li>
+<li><b>Scan files (optional).</b> Add accounts you did not sign in to with those services by uploading a mail export or a browser password export.</li>
+<li><b>Inventory.</b> For each account, mark how important it is, what is at stake, and where your saved copy lives. Aim for a copy of every Irreplaceable account. The Save and convert tab turns exports into open formats and counts down shutdown dates.</li>
+<li><b>Lock and share.</b> Name 3 to 8 trusted people and choose how many must cooperate, for example 3 of 5. Ark produces one encrypted vault text and one piece for each person.</li>
+<li><b>Hand over.</b> Send each person their piece by a different route. Keep the vault text somewhere safe, such as your cloud drive. Later, those people paste the vault text and enough pieces into step 5 to open it and read your guide.</li></ol>
+<div class="note">If you are a family member helping after a loss, go straight to step 5. You need the vault text and pieces from enough of the trusted people.</div></div>
+<div class="panel"><h2>Good to know</h2>
+<ul class="steps"><li><b>Already have an export?</b> Drop the ZIP in the Drop export tab. Ark unpacks and checks it on your device and marks that account as saved. You can then save an encrypted second copy to another drive.</li><li><b>Privacy.</b> Files are processed in this browser and are not uploaded by the app. The page loads JSZip from a third-party CDN. Inventory details are stored in this browser’s local storage without encryption until you create a locked vault. Do not use this prototype for real secrets.</li>
+<li><b>Your list stays in this browser.</b> Inventory data is saved in local storage on this device in readable form until you create a locked vault. Clear browser data or a different browser profile may make it unavailable.</li>
+<li><b>One piece alone is useless.</b> That is the safety feature. Do not keep all pieces in one place.</li>
+<li><b>Test it once.</b> Try opening the vault with your own pieces before you rely on it, then review every six months.</li>
+<li><b>Limits.</b> Ark does not bypass security or log in for anyone, does not send automatic alerts, and is not legal advice. Follow each provider’s official process for accounts after a death.</li></ul></div>
+</section>
+<section id="conn" hidden>
+<div class="panel"><h2>Import from Google, Apple and Facebook</h2>
+<p>Each service keeps a list of the apps and sites you signed in to with it. Google, Apple and Meta do not let other apps read that list, so Ark cannot sign in and fetch it for you. Instead you open your own list, copy it, and paste it here. The text stays in this tab.</p>
+<div id="provs"></div><div id="impMsg" class="sub" aria-live="polite"></div></div>
+<div class="panel cand" id="candBox" hidden><h2>Please check these</h2><p class="sub">Ark could not tell whether these lines are accounts. Tick the real ones.</p><div id="candList"></div><p><button class="btn" id="candAdd">Add ticked items</button> <button class="btn alt" id="candAll">Tick all</button></p></div>
+</section>
+<section id="scan" hidden>
+<div class="panel"><h2>Find accounts from your own files</h2>
+<p class="sub">Accepts mail exports (.mbox, .eml, .txt) and a browser password export (.csv). Ark reads only sender domains, subject lines and site addresses. It never reads or keeps passwords.</p>
+<label for="files">Choose files</label><input type="file" id="files" multiple accept=".mbox,.eml,.txt,.csv">
+<label for="paste">Or paste sender addresses, subjects or website addresses, one per line</label>
+<textarea id="paste" placeholder="welcome@notion.so  Welcome to Notion&#10;orders@zomato.com  Your receipt&#10;https://www.dropbox.com/login"></textarea>
+<p><button class="btn" id="go">Scan</button></p><div id="scanMsg" class="sub" aria-live="polite"></div></div>
+</section>
+
+<section id="inv" hidden>
+<div class="panel"><div class="g" style="align-items:center"><div class="score" id="score">0%</div><div class="sub" id="scoreTxt">Add accounts in step 1 or below.</div></div></div>
+<div class="panel"><h2>Your accounts</h2><div id="list"></div>
+<div class="g"><input type="text" id="addName" placeholder="Add an account by hand (name or site)" aria-label="Add account"><button class="btn alt" id="add">Add account</button></div></div>
+</section>
+
+<section id="lock" hidden>
+<div class="panel"><h2>Lock your inventory</h2>
+<p class="sub">Ark encrypts your inventory with a random passphrase, then splits that passphrase into pieces for the people you trust. The encrypted text is useless alone, so you can store it anywhere.</p>
+<label for="owner">Your name</label><input type="text" id="owner" placeholder="Asha Verma">
+<label for="people">Trusted people, one per line: name, how to reach them</label>
+<textarea id="people" placeholder="Ravi, 98xxxxxx01&#10;Meera, meera@example.com&#10;Dr. Khan, 98xxxxxx22"></textarea>
+<label for="k">Pieces needed to open</label><select id="k"></select>
+<p><button class="btn" id="seal">Lock and create pieces</button></p><div id="sealOut"></div></div>
+</section>
+
+<section id="rec" hidden>
+<div class="panel"><h2>Open a locked vault</h2>
+<label for="blob">Encrypted vault text</label><textarea id="blob"></textarea>
+<label for="pieces">Pieces from trusted people, one per line</label><textarea id="pieces"></textarea>
+<p><button class="btn" id="open">Open vault</button></p><div id="recMsg" aria-live="polite"></div></div>
+<div class="panel" id="guideBox" hidden><h2>Where everything is</h2><textarea id="guide" readonly style="min-height:260px"></textarea>
+<p class="noprint"><button class="btn alt" data-copy="guide">Copy guide</button> <button class="btn alt" id="print">Print</button></p></div>
+</section>
+<section id="drop" hidden>
+<div class="panel"><h2>Drop an export</h2>
+<p class="sub">Download your data from Google (Takeout), Apple (privacy.apple.com) or Meta (Download your information), then drop the ZIP here. Ark opens it on your device, shows what is inside, turns notes and contacts into open formats, and marks that account as saved in your Inventory.</p>
+<div class="drop" id="dz" tabindex="0" role="button" aria-label="Choose or drop ZIP export files"><b>Drop ZIP files here</b><div class="sub">or tap to choose files</div></div>
+<input type="file" id="zipIn" accept=".zip" multiple hidden>
+<div class="note">After you drop a ZIP, press Save encrypted second copy. Ark encrypts it with a random passphrase and offers the copy as a file to save. Keep that file on a different device or drive than the original. The passphrase is shown once after encryption. Save it separately from the encrypted file; Ark does not retain it. Large exports of several gigabytes may not open in a browser, so ask the service to split the export into smaller parts.</div>
+<div id="dropMsg" aria-live="polite"></div><div id="dropRes"></div></div>
+<div class="panel"><h2>Restore a second copy</h2><p class="sub">Choose an Ark copy file and its passphrase. Ark decrypts it here and offers your original ZIP back.</p><label for="rsFile">Copy file</label><input type="file" id="rsFile" accept=".zip"><label for="rsPass">Passphrase</label><input type="text" id="rsPass" autocomplete="off"><p><button class="btn" id="rsGo">Decrypt and save</button></p><div id="rsMsg" aria-live="polite"></div></div>
+<div class="panel" id="dropOut" hidden><h2>Converted from your export</h2>
+<div id="nWrap" hidden><label for="nOut">Notes as Markdown</label><textarea id="nOut" readonly style="min-height:150px"></textarea><p><button class="btn alt" data-copy="nOut">Copy notes</button> <button class="btn alt" data-save="nOut|notes.md">Save notes file</button></p></div>
+<div id="vWrap" hidden><label for="vOut">Contacts as vCard</label><textarea id="vOut" readonly style="min-height:120px"></textarea><p><button class="btn alt" data-copy="vOut">Copy contacts</button> <button class="btn alt" data-save="vOut|contacts-vcard.txt">Save contacts file (rename to .vcf)</button></p></div></div>
+</section>
+<section id="save" hidden>
+<div class="panel"><h2>Shutdown watcher</h2>
+<p class="sub">Ark cannot watch the news for you. When you hear that a service is closing, add it here and Ark counts down the days and tells you what to do. Automatic monitoring would need a server.</p>
+<div class="g"><div><label for="wAcc">Account from your inventory</label><select id="wAcc"></select></div><div><label for="wName">Or a different name</label><input type="text" id="wName"></div><div><label for="wDate">Closing date</label><input type="date" id="wDate" style="width:100%;background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:7px;padding:8px;font:inherit"></div><div><label for="wNote">Source or note</label><input type="text" id="wNote" placeholder="Email from the company"></div></div>
+<p><button class="btn" id="wAdd">Add to watch list</button> <span class="sub" id="wMsg" aria-live="polite"></span></p><div id="wList"></div></div>
+<div class="panel"><h2>Convert an export to an open format</h2>
+<p class="sub">Paste or upload an export (JSON list or CSV with a header row). Ark converts it in this tab. Copy the result and save it as a file on your computer: .md, .vcf or .csv.</p>
+<label for="cvFile">Upload an export file</label><input type="file" id="cvFile" accept=".json,.csv,.txt">
+<label for="cvIn">Or paste it here</label><textarea id="cvIn"></textarea>
+<div class="g"><div><label for="cvFmt">Convert to</label><select id="cvFmt"><option value="md">Notes as Markdown (.md)</option><option value="vcf">Contacts as vCard (.vcf)</option><option value="csv">Table as CSV (.csv)</option></select></div></div>
+<p><button class="btn" id="cvGo">Convert</button> <button class="btn alt" id="cvSample">Load sample</button></p><div id="cvMsg" aria-live="polite"></div>
+<textarea id="cvOut" readonly style="min-height:180px" aria-label="Converted output"></textarea><p><button class="btn alt" data-copy="cvOut">Copy result</button></p></div>
+</section>
+<footer class="sub" style="text-align:center;padding:18px 8px 0">ARK VAULT · A privacy-minded prototype · Not legal, financial or security advice</footer>
+</main>
+<script>
+const $=id=>document.getElementById(id),enc=s=>new TextEncoder().encode(s),esc=s=>String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{document.querySelectorAll('nav button').forEach(x=>x.setAttribute('aria-selected',x===b));['how','conn','scan','inv','lock','rec','drop','save'].forEach(i=>$(i).hidden=i!==b.dataset.t);if(b.dataset.t==='inv')drawInv();if(b.dataset.t==='lock')fillK();});
+
+// ----- known services: domain -> [name, default priority 0 irreplaceable/1 important/2 minor, official legacy step]
+const K={'google.com':['Google',0,'Set up Inactive Account Manager in your Google account settings.'],'apple.com':['Apple / iCloud',0,'Add a Legacy Contact in Apple ID settings.'],'icloud.com':['Apple / iCloud',0,'Add a Legacy Contact in Apple ID settings.'],'facebook.com':['Facebook',1,'Choose a Legacy Contact in Facebook settings.'],'facebookmail.com':['Facebook',1,'Choose a Legacy Contact in Facebook settings.'],'instagram.com':['Instagram',1,'Family can request memorialization through Instagram help.'],'dropbox.com':['Dropbox',0,''],'microsoft.com':['Microsoft / OneDrive',0,'Family uses Microsoft’s next-of-kin process via support.'],'github.com':['GitHub',1,''],'notion.so':['Notion',1,''],'evernote.com':['Evernote',1,''],'spotify.com':['Spotify',2,''],'netflix.com':['Netflix',2,''],'amazon.com':['Amazon',1,''],'amazon.in':['Amazon India',1,''],'paypal.com':['PayPal',1,''],'linkedin.com':['LinkedIn',1,''],'zomato.com':['Zomato',2,''],'swiggy.in':['Swiggy',2,''],'paytm.com':['Paytm',1,''],'shopify.com':['Shopify',0,''],'canva.com':['Canva',1,''],'figma.com':['Figma',1,''],'adobe.com':['Adobe',1,'']};
+const SKIP=new Set(['gmail.com','googlemail.com','yahoo.com','hotmail.com','outlook.com','live.com','proton.me','protonmail.com','example.com']);
+const SIG=/welcome|verify|confirm|receipt|invoice|order|password|subscription|your account|sign.?in|security|login|reset/i;
+function reg(h){h=h.toLowerCase().replace(/^www\./,'');const p=h.split('.');if(p.length>2&&p[p.length-1].length===2&&['co','com','org','net','ac','gov'].includes(p[p.length-2]))return p.slice(-3).join('.');return p.slice(-2).join('.');}
+
+// ----- state
+let S={accounts:[]};
+try{const s=JSON.parse(localStorage.getItem('ark-vault')||'null');if(s&&Array.isArray(s.accounts))S=s;}catch(e){}
+const save=()=>{try{localStorage.setItem('ark-vault',JSON.stringify(S));}catch(e){}};
+function addAcc(domain,hits){domain=reg(domain);if(!domain||SKIP.has(domain))return false;let a=S.accounts.find(x=>x.domain===domain);if(a){a.hits+=hits;return false;}
+ const k=K[domain];S.accounts.push({domain,name:k?k[0]:domain,hits,level:k?k[1]:1,status:0,note:'',where:'',legacy:k?k[2]:''});return true;}
+
+// ----- scanning
+function scanMail(text){let n=0;const chunks=/^From .*$/m.test(text)?text.split(/^From .*$/m):[text];
+ for(const c of chunks){const f=c.match(/^From:.*?@([\w.-]+)/im),s=c.match(/^Subject:\s*(.*)$/im);
+  if(f){if(SIG.test(s?s[1]:''))n+=addAcc(f[1],1);}
+  else for(const l of c.split('\n')){const m=l.match(/@([\w-]+(?:\.[\w-]+)+)/);if(m&&SIG.test(l))n+=addAcc(m[1],1);const u=l.match(/https?:\/\/([\w.-]+)/i);if(u)n+=addAcc(u[1],1);}}
+ return n;}
+function csvRow(l){const o=[];let c='',q=false;for(const ch of l){if(ch==='"')q=!q;else if(ch===','&&!q){o.push(c);c='';}else c+=ch;}o.push(c);return o;}
+function scanCsv(text){const rows=text.split(/\r?\n/).filter(Boolean),h=csvRow(rows[0]).map(x=>x.trim().toLowerCase()),i=h.indexOf('url');if(i<0)return scanMail(text);
+ let n=0;for(const r of rows.slice(1)){const u=csvRow(r)[i];try{n+=addAcc(new URL(u).hostname,1);}catch(e){}}return n;}  // other columns, including passwords, are never read
+$('go').onclick=async()=>{let n=0,files=[...$('files').files];
+ for(const f of files){const t=await f.text();n+=/\.csv$/i.test(f.name)?scanCsv(t):scanMail(t);}
+ if($('paste').value.trim())n+=scanMail($('paste').value);
+ save();$('scanMsg').textContent=n?n+' new account'+(n>1?'s':'')+' found. Open step 2 to review them.':'No new accounts found. Check that the files contain sender lines, subjects or site addresses.';};
+
+// ----- inventory
+const LV=['Irreplaceable','Important','Minor'],ST=['Not saved','Copy saved','Official legacy set'];
+function drawInv(){const L=$('list');L.innerHTML='';
+ S.accounts.forEach((a,i)=>{const d=document.createElement('div');d.className='acc';
+  d.innerHTML='<b>'+esc(a.name)+'</b> <span class="sub">'+esc(a.domain)+(a.via?', via '+esc(a.via.join(', ')):', seen '+a.hits+'×')+'</span><div class="g"><div><label>Priority</label><select data-k="level">'+LV.map((x,j)=>'<option value="'+j+'"'+(a.level==j?' selected':'')+'>'+x+'</option>').join('')+'</select></div><div><label>Status</label><select data-k="status">'+ST.map((x,j)=>'<option value="'+j+'"'+(a.status==j?' selected':'')+'>'+x+'</option>').join('')+'</select></div><div><label>What is at stake</label><input type="text" data-k="note" value="'+esc(a.note).replace(/"/g,'&quot;')+'"></div><div><label>Where the copy is</label><input type="text" data-k="where" value="'+esc(a.where).replace(/"/g,'&quot;')+'"></div></div><button class="btn alt" style="margin-top:8px" data-rm="1">Remove</button>';
+  d.querySelectorAll('[data-k]').forEach(e=>e.onchange=()=>{const k=e.dataset.k;a[k]=(k==='level'||k==='status')?+e.value:e.value;save();score();});
+  d.querySelector('[data-rm]').onclick=()=>{S.accounts.splice(i,1);save();drawInv();};L.append(d);});
+ if(!S.accounts.length)L.innerHTML='<p class="sub">No accounts yet. Run a scan or add one below.</p>';score();}
+function score(){const w=[3,2,1],t=S.accounts.reduce((x,a)=>x+w[a.level],0),s=S.accounts.reduce((x,a)=>x+(a.status?w[a.level]:0),0),p=t?Math.round(100*s/t):0,o=S.accounts.filter(a=>a.level===0&&!a.status).length;
+ $('score').textContent=p+'%';$('scoreTxt').textContent=t?(o?o+' irreplaceable account'+(o>1?'s have':' has')+' no saved copy yet.':'Every irreplaceable account has a saved copy.'):'Add accounts in step 1 or below.';}
+$('add').onclick=()=>{const v=$('addName').value.trim();if(!v)return;const d=v.includes('.')?v:v.toLowerCase().replace(/\W+/g,'')+'.local';addAcc(d,0);const a=S.accounts.find(x=>x.domain===reg(d));if(a&&!K[reg(d)])a.name=v;$('addName').value='';save();drawInv();};
+
+// ----- Shamir over GF(256)
+const EXP=new Uint8Array(512),LOG=new Uint8Array(256);
+(()=>{let x=1;for(let i=0;i<255;i++){EXP[i]=x;LOG[x]=i;let y=x<<1;if(y&256)y^=283;x=(y^x)&255;}for(let i=255;i<512;i++)EXP[i]=EXP[i-255];})();
+const mul=(a,b)=>a&&b?EXP[LOG[a]+LOG[b]]:0,dv=(a,b)=>a?EXP[LOG[a]+255-LOG[b]]:0;
+function split(bytes,n,k){const sh=Array.from({length:n},(_,i)=>({x:i+1,y:new Uint8Array(bytes.length)}));
+ bytes.forEach((b,p)=>{const c=new Uint8Array(k);c[0]=b;crypto.getRandomValues(c.subarray(1));sh.forEach(s=>{let v=0;for(let j=k-1;j>=0;j--)v=mul(v,s.x)^c[j];s.y[p]=v;});});return sh;}
+function combine(sh){const o=new Uint8Array(sh[0].y.length);for(let p=0;p<o.length;p++){let a=0;sh.forEach((si,i)=>{let l=1;sh.forEach((sj,j)=>{if(i!==j)l=mul(l,dv(sj.x,si.x^sj.x));});a^=mul(si.y[p],l);});o[p]=a;}return o;}
+const hex=u=>[...u].map(b=>b.toString(16).padStart(2,'0')).join('');
+
+// ----- crypto: PBKDF2 -> AES-GCM
+const b64=u=>btoa(String.fromCharCode(...u)),ub64=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
+async function dk(pass,salt){const m=await crypto.subtle.importKey('raw',enc(pass),'PBKDF2',false,['deriveKey']);return crypto.subtle.deriveKey({name:'PBKDF2',salt,iterations:150000,hash:'SHA-256'},m,{name:'AES-GCM',length:256},false,['encrypt','decrypt']);}
+async function seal(pass,obj){const salt=crypto.getRandomValues(new Uint8Array(16)),iv=crypto.getRandomValues(new Uint8Array(12)),ct=new Uint8Array(await crypto.subtle.encrypt({name:'AES-GCM',iv},await dk(pass,salt),enc(JSON.stringify(obj))));return 'ARK1.'+b64(salt)+'.'+b64(iv)+'.'+b64(ct);}
+async function unseal(pass,blob){const [v,s,i,c]=blob.trim().split('.');if(v!=='ARK1')throw new Error('format');return JSON.parse(new TextDecoder().decode(await crypto.subtle.decrypt({name:'AES-GCM',iv:ub64(i)},await dk(pass,ub64(s)),ub64(c))));}
+const people=()=>$('people').value.split('\n').map(l=>l.trim()).filter(Boolean).map(l=>{const i=l.indexOf(',');return{name:(i<0?l:l.slice(0,i)).trim(),contact:i<0?'':l.slice(i+1).trim()};});
+function fillK(){const n=Math.max(2,people().length),v=$('k').value;$('k').innerHTML='';for(let i=2;i<=Math.min(n,8);i++)$('k').add(new Option(i+' of '+Math.min(n,8),i));$('k').value=v||Math.min(3,n);}
+$('people').oninput=fillK;
+
+$('seal').onclick=async()=>{const P=people().slice(0,8),out=$('sealOut');
+ if(P.length<2){out.innerHTML='<p class="bad">Add at least two trusted people.</p>';return;}
+ if(!S.accounts.length){out.innerHTML='<p class="bad">Your inventory is empty. Add accounts first.</p>';return;}
+ const k=Math.min(+$('k').value||2,P.length),al='abcdefghjkmnpqrstuvwxyz23456789',r=crypto.getRandomValues(new Uint8Array(24)),pass=[...r].map(b=>al[b%al.length]).join('');
+ const data={v:1,owner:$('owner').value||'Unnamed',created:new Date().toISOString().slice(0,10),threshold:k,people:P,accounts:S.accounts};
+ const blob=await seal(pass,data),sh=split(enc(pass),P.length,k);
+ out.innerHTML='<p class="ok">Locked. Any '+k+' of '+P.length+' pieces can open it.</p><label>Encrypted vault (safe to store in cloud drive or email)</label><textarea id="blobOut" readonly>'+blob+'</textarea><button class="btn alt" data-copy="blobOut">Copy vault</button><h2 style="margin-top:18px">Pieces</h2><p class="sub">Send each piece to its person through a different channel. Do not keep them together.</p>';
+ sh.forEach((s,i)=>{const d=document.createElement('div');d.className='piece';const id='pc'+i;d.innerHTML='<b>'+esc(P[i].name)+'</b> <span class="sub">'+esc(P[i].contact)+'</span><code id="'+id+'">ARK-S-'+hex([s.x])+hex(s.y)+'</code><button class="btn alt" data-copy="'+id+'">Copy piece</button>';out.append(d);});};
+
+$('open').onclick=async()=>{const m=$('recMsg');m.innerHTML='';$('guideBox').hidden=true;
+ try{const sh=$('pieces').value.split('\n').map(l=>l.trim().replace(/^ARK-S-/,'')).filter(Boolean).map(h=>{if(!/^([0-9a-f]{2})+$/i.test(h)||h.length<4)throw new Error('piece');const u=Uint8Array.from(h.match(/../g).map(x=>parseInt(x,16)));return{x:u[0],y:u.slice(1)};});
+  if(sh.length<2)throw new Error('few');if(new Set(sh.map(s=>s.y.length)).size>1||new Set(sh.map(s=>s.x)).size<sh.length)throw new Error('piece');
+  const data=await unseal(new TextDecoder().decode(combine(sh)),$('blob').value);
+  m.innerHTML='<p class="ok">Vault opened.</p>';$('guide').value=makeGuide(data);$('guideBox').hidden=false;}
+ catch(e){m.innerHTML='<p class="bad">Could not open the vault.</p><p class="sub">Either too few pieces were entered, a piece has a typo, or the vault text is incomplete. The lock gives no hints about which.</p>';}};
+
+function makeGuide(d){const due=new Date(d.created);due.setDate(due.getDate()+180);const L=['WHERE EVERYTHING IS','Prepared by '+d.owner+' on '+d.created+'. Review due by '+due.toISOString().slice(0,10)+'.','','TRUSTED PEOPLE (any '+d.threshold+' of them can open the vault)'];
+ d.people.forEach(p=>L.push('- '+p.name+(p.contact?' ('+p.contact+')':'')));L.push('','ACCOUNTS, MOST IMPORTANT FIRST');
+ [...d.accounts].sort((a,b)=>a.level-b.level).forEach(a=>{L.push('',a.name+' ['+LV[a.level]+']','  Site: '+a.domain+(a.via?' (found via '+a.via.join(', ')+')':''),'  Status: '+ST[a.status]);if(a.note)L.push('  At stake: '+a.note);if(a.where)L.push('  Copy is kept: '+a.where);if(a.legacy)L.push('  Official step: '+a.legacy+' (check the provider’s current steps)');});
+ L.push('','FIRST STEPS','1. Do not guess passwords or try to bypass any security.','2. Use each provider’s official legacy or deceased-user process, with a death certificate if asked.','3. Start with the Irreplaceable accounts.');return L.join('\n');}
+
+document.addEventListener('click',e=>{const id=e.target.dataset&&e.target.dataset.copy;if(!id)return;const el=$(id),t=el.value!==undefined?el.value:el.textContent;
+ const done=()=>{e.target.textContent='Copied';setTimeout(()=>e.target.textContent='Copy',1500);};
+ navigator.clipboard&&navigator.clipboard.writeText(t).then(done).catch(()=>{if(el.select){el.select();}e.target.textContent='Select and copy by hand';});});
+$('print').onclick=()=>{try{window.print();}catch(e){}};
+
+// ----- save and convert + shutdown watcher
+const lk=o=>Object.fromEntries(Object.entries(o).map(([k,v])=>[k.toLowerCase().replace(/\W/g,''),v]));
+const pk=(o,ks)=>{for(const k of ks)if(o[k]!=null&&String(o[k]).trim()!=='')return String(o[k]).trim();return '';};
+function parseTable(t){t=t.trim();if(!t)throw new Error('Paste or upload something first.');
+ if(/^[\[{]/.test(t)){let j=JSON.parse(t);if(!Array.isArray(j))j=Object.values(j).find(Array.isArray)||[j];return j.map(x=>x&&typeof x==='object'?x:{text:String(x)});}
+ const rows=t.split(/\r?\n/).filter(Boolean).map(csvRow),h=rows[0].map(x=>x.trim());return rows.slice(1).map(r=>Object.fromEntries(h.map((k,i)=>[k,r[i]||''])));}
+const CV={
+ md:r=>r.map(lk).map(o=>{const d=pk(o,['created','date','createdat','updatedat','timestamp']);return '# '+(pk(o,['title','name','subject','heading'])||'Untitled')+'\n'+(d?'*Saved from '+d+'*\n':'')+'\n'+pk(o,['body','text','content','note','notes','description','message']);}).join('\n\n---\n\n'),
+ vcf:r=>r.map(lk).map(o=>{const n=pk(o,['name','fullname','displayname'])||[pk(o,['firstname','first','givenname']),pk(o,['lastname','last','surname','familyname'])].filter(Boolean).join(' '),e=pk(o,['email','mail','emailaddress']),p=pk(o,['phone','tel','mobile','phonenumber']);return (n||e)?['BEGIN:VCARD','VERSION:3.0','FN:'+(n||e),e&&'EMAIL:'+e,p&&'TEL:'+p,'END:VCARD'].filter(Boolean).join('\n'):'';}).filter(Boolean).join('\n'),
+ csv:r=>{const h=[...new Set(r.flatMap(Object.keys))],q=v=>'"'+String(v==null?'':typeof v==='object'?JSON.stringify(v):v).replace(/"/g,'""')+'"';return [h.map(q).join(',')].concat(r.map(o=>h.map(k=>q(o[k])).join(','))).join('\n');}};
+$('cvGo').onclick=()=>{const m=$('cvMsg');try{const r=parseTable($('cvIn').value),out=CV[$('cvFmt').value](r);$('cvOut').value=out;m.innerHTML=out?'<span class="ok">Converted '+r.length+' item'+(r.length===1?'':'s')+'.</span>':'<span class="bad">Nothing matched. Check that your data has the fields that format needs.</span>';}catch(e){$('cvOut').value='';m.innerHTML='<span class="bad">Could not read that data: '+esc(e.message)+'</span>';}};
+$('cvFile').onchange=async e=>{const f=e.target.files[0];if(f)$('cvIn').value=await f.text();};
+$('cvSample').onclick=()=>{$('cvIn').value=JSON.stringify([{title:'Grandma’s dal',created:'2019-03-02',body:'Soak lentils 30 min.\nTemper with cumin and ghee.'},{title:'Wedding menu',created:'2021-11-20',body:'Starter: paneer tikka'}],null,1);};
+function drawWatch(){S.watch=S.watch||[];$('wAcc').innerHTML='<option value="">Other (type a name)</option>'+S.accounts.map((a,i)=>'<option value="'+i+'">'+esc(a.name)+'</option>').join('');
+ const L=$('wList');L.innerHTML='';
+ [...S.watch].sort((a,b)=>a.date<b.date?-1:1).forEach(w=>{const days=Math.ceil((new Date(w.date+'T00:00:00')-new Date().setHours(0,0,0,0))/864e5),d=document.createElement('div');d.className='acc';
+  const msg=days<0?'Closed '+(-days)+' days ago':days===0?'Closes today':days+' day'+(days===1?'':'s')+' left';
+  d.innerHTML='<b>'+esc(w.name)+'</b> <span class="'+(days<=14?'bad':'sub')+'">'+msg+'</span><div class="sub">Date: '+esc(w.date)+(w.note?'. '+esc(w.note):'')+'</div><p class="sub">'+(days<0?'If the service is gone, try its official export page or ask its support whether data can still be retrieved.':'Export now in the service’s own settings, convert it below, then mark Copy saved in the Inventory.')+'</p>';
+  const b=document.createElement('button');b.className='btn alt';b.textContent='Remove';b.onclick=()=>{S.watch.splice(S.watch.indexOf(w),1);save();drawWatch();};d.append(b);L.append(d);});
+ if(!S.watch.length)L.innerHTML='<p class="sub">No shutdown notices yet.</p>';}
+$('wAdd').onclick=()=>{S.watch=S.watch||[];const i=$('wAcc').value,name=i!==''?S.accounts[+i].name:$('wName').value.trim(),date=$('wDate').value;if(!name||!date){$('wMsg').textContent='Choose or type an account and set a date.';return;}S.watch.push({name,date,note:$('wNote').value.trim()});$('wMsg').textContent='';$('wName').value='';$('wNote').value='';save();drawWatch();};
+document.querySelector('[data-t=save]').addEventListener('click',drawWatch);
+
+// ----- one-drop import
+const EXT={photo:/\.(jpe?g|png|heic|gif|webp)$/i,video:/\.(mp4|mov|m4v|avi)$/i,doc:/\.(pdf|docx?|xlsx?|pptx?|txt|md)$/i,data:/\.(json|csv|html?|xml)$/i,contact:/\.vcf$/i};
+function svc(names,file){const t=names.join('\n');
+ if(/(^|\/)Takeout\//.test(t))return{d:'google.com',n:'Google'};
+ if(/instagram/i.test(t))return{d:'instagram.com',n:'Instagram'};
+ if(/your_facebook_activity|facebook/i.test(t))return{d:'facebook.com',n:'Facebook'};
+ if(/icloud|apple/i.test(t))return{d:'apple.com',n:'Apple / iCloud'};
+ const b=file.replace(/\.zip$/i,'');return{d:(b.toLowerCase().replace(/\W+/g,'')||'export')+'.local',n:b};}
+function noteMd(x){let body=x.textContent||x.body||x.text||'';if(Array.isArray(x.listContent))body=x.listContent.map(i=>'- ['+(i.isChecked?'x':' ')+'] '+(i.text||'')).join('\n');if(!body&&!x.title)return '';const d=x.createdTimestampUsec?new Date(x.createdTimestampUsec/1000).toISOString().slice(0,10):'';return '# '+(x.title||'Untitled')+'\n'+(d?'*Saved from '+d+'*\n':'')+'\n'+body;}
+async function readZip(file){const zip=await JSZip.loadAsync(file),es=Object.values(zip.files).filter(e=>!e.dir),s=svc(es.map(e=>e.name),file.name);
+ const cnt={photo:0,video:0,doc:0,data:0,contact:0,other:0},folders={};let bytes=0;
+ for(const e of es){bytes+=(e._data&&e._data.uncompressedSize)||0;let k='other';for(const t in EXT)if(EXT[t].test(e.name)){k=t;break;}cnt[k]++;const p=e.name.split('/').slice(0,s.d==='google.com'?2:1).join('/');folders[p]=(folders[p]||0)+1;}
+ const notes=[],vcf=[];
+ for(const e of es.slice(0,5000)){try{
+  if(/\.vcf$/i.test(e.name)&&vcf.length<200)vcf.push(await e.async('string'));
+  else if(/\.json$/i.test(e.name)&&notes.length<500&&/keep|notes/i.test(e.name)){const o=JSON.parse(await e.async('string'));for(const x of (Array.isArray(o)?o:[o])){const m=x&&typeof x==='object'?noteMd(x):'';if(m)notes.push(m);}}
+ }catch(err){}}
+ return{s,cnt,folders,bytes,files:es.length,notes,vcf,name:file.name};}
+function record(r){const sum=r.files+' files: '+r.cnt.photo+' photos, '+r.cnt.video+' videos, '+r.cnt.doc+' documents, '+r.cnt.data+' data files';
+ addAcc(r.s.d,0);const a=S.accounts.find(x=>x.domain===reg(r.s.d));if(!a)return;if(/\.local$/.test(a.domain))a.name=r.s.n;a.status=Math.max(a.status,1);a.where='Export ZIP on my device: '+r.name;a.note=a.note||sum;a.via=[...new Set([...(a.via||[]),'Export drop'])];}
+async function handleZips(files){const m=$('dropMsg'),out=$('dropRes');const list=[...files].filter(f=>/\.zip$/i.test(f.name));
+ if(!list.length){m.innerHTML='<p class="bad">Please choose .zip files.</p>';return;}
+ if(typeof JSZip==='undefined'){m.innerHTML='<p class="bad">The unzip library did not load. This page needs internet access to cdnjs.cloudflare.com.</p>';return;}
+ m.textContent='Opening '+list.length+' file'+(list.length>1?'s':'')+'...';const allN=[],allV=[];let ok=0;
+ for(const f of list){try{const r=await readZip(f);record(r);ok++;allN.push(...r.notes);allV.push(...r.vcf);
+  const d=document.createElement('div');d.className='acc';const top=Object.entries(r.folders).sort((a,b)=>b[1]-a[1]).slice(0,8).map(([k,v])=>esc(k)+' ('+v+')').join(', ');
+  d.innerHTML='<b>'+esc(r.s.n)+'</b> <span class="ok">recorded as saved</span><div class="sub">'+esc(r.name)+'</div><p>'+r.files+' files'+(r.bytes?', about '+(r.bytes/1048576).toFixed(1)+' MB unpacked':'')+'. '+r.cnt.photo+' photos, '+r.cnt.video+' videos, '+r.cnt.doc+' documents, '+r.cnt.data+' data files, '+r.cnt.contact+' contact files.</p><div class="sub">Main folders: '+(top||'none')+'</div>';out.prepend(d);addCopyUI(d,r,f);}
+  catch(err){const d=document.createElement('div');d.className='acc';d.innerHTML='<b>'+esc(f.name)+'</b> <span class="bad">could not be opened</span><div class="sub">'+esc(err.message)+'. The file may be too large for the browser, damaged, or not a ZIP. Ask the service to split the export into smaller parts.</div>';out.prepend(d);}}
+ save();m.innerHTML=ok?'<p class="ok">'+ok+' export'+(ok>1?'s':'')+' recorded. Review them in step 3, Inventory.</p>':'';
+ $('nOut').value=allN.join('\n\n---\n\n');$('vOut').value=allV.join('\n');$('nWrap').hidden=!allN.length;$('vWrap').hidden=!allV.length;$('dropOut').hidden=!(allN.length||allV.length);}
+const dz=$('dz');dz.onclick=()=>$('zipIn').click();dz.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();$('zipIn').click();}};
+$('zipIn').onchange=e=>handleZips(e.target.files);
+['dragenter','dragover'].forEach(t=>dz.addEventListener(t,e=>{e.preventDefault();dz.classList.add('over');}));
+['dragleave','drop'].forEach(t=>dz.addEventListener(t,e=>{e.preventDefault();dz.classList.remove('over');}));
+dz.addEventListener('drop',e=>handleZips(e.dataTransfer.files));
+
+// ----- second copies and restore (uses the downloads capability)
+const AL='abcdefghjkmnpqrstuvwxyz23456789';
+async function saveFile(name,data){
+ const blob=data instanceof Blob?data:new Blob([data],{type:'application/octet-stream'});
+ const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;a.rel='noopener';document.body.appendChild(a);a.click();a.remove();
+ setTimeout(()=>URL.revokeObjectURL(url),1500);
+}
+
+async function encBytes(buf,pass){const salt=crypto.getRandomValues(new Uint8Array(16)),iv=crypto.getRandomValues(new Uint8Array(12)),ct=new Uint8Array(await crypto.subtle.encrypt({name:'AES-GCM',iv},await dk(pass,salt),buf));const o=new Uint8Array(33+ct.length);o.set(enc('ARKC1'));o.set(salt,5);o.set(iv,21);o.set(ct,33);return o;}
+async function decBytes(u,pass){if(new TextDecoder().decode(u.slice(0,5))!=='ARKC1')throw new Error('This is not an Ark encrypted copy.');try{return new Uint8Array(await crypto.subtle.decrypt({name:'AES-GCM',iv:u.slice(21,33)},await dk(pass,u.slice(5,21)),u.slice(33)));}catch(e){throw new Error('Wrong passphrase, or the file is damaged.');}}
+function addCopyUI(d,r,f){const p=document.createElement('p'),b=document.createElement('button'),m=document.createElement('div');b.className='btn';b.textContent='Save encrypted second copy';m.className='sub';m.setAttribute('aria-live','polite');p.append(b);d.append(p,m);
+ b.onclick=async()=>{b.disabled=true;m.textContent='Encrypting...';
+  try{const pass=[...crypto.getRandomValues(new Uint8Array(24))].map(x=>AL[x%AL.length]).join(''),day=new Date().toISOString().slice(0,10),ct=await encBytes(await f.arrayBuffer(),pass),z=new JSZip();
+   z.file('copy.enc',ct);z.file('manifest.json',JSON.stringify({tool:'Ark Vault',service:r.s.n,original:f.name,created:day,files:r.files}));
+   z.file('README.txt','This is an encrypted backup made by Ark Vault.\nIt is AES-256-GCM encrypted and cannot be opened without its passphrase.\nTo restore it: open Ark Vault, go to Drop export, and use Restore a second copy.\n');
+   const name='ark-copy-'+(r.s.n.toLowerCase().replace(/\W+/g,'-'))+'-'+day+'.zip';await saveFile(name,await z.generateAsync({type:'blob',compression:'STORE'}));
+   const a=S.accounts.find(x=>x.domain===reg(r.s.d));if(a){a.where='Encrypted copy: '+name+' (original ZIP: '+f.name+'). Passphrase stored separately by owner.';a.status=Math.max(a.status,1);save();}
+   m.innerHTML='<span class="ok">Second copy saved as '+esc(name)+'.</span><p><b>Backup passphrase (shown once):</b></p><code>'+pass+'</code><p class="sub">Store this passphrase separately from the encrypted backup. It is not saved in Ark Vault.</p>';}
+  catch(e){m.innerHTML='<span class="bad">'+esc(e.code==='declined'?'You declined the save, so nothing was saved.':(e.message||'Could not save the copy.'))+'</span>';b.disabled=false;}};}
+$('rsGo').onclick=async()=>{const m=$('rsMsg'),f=$('rsFile').files[0],pass=$('rsPass').value.trim();if(!f||!pass){m.innerHTML='<span class="bad">Choose the copy file and enter its passphrase.</span>';return;}
+ try{if(typeof JSZip==='undefined')throw new Error('The unzip library did not load.');const z=await JSZip.loadAsync(f),e=z.file('copy.enc');if(!e)throw new Error('This is not an Ark copy file.');let man={};try{man=JSON.parse(await z.file('manifest.json').async('string'));}catch(x){}
+  const plain=await decBytes(await e.async('uint8array'),pass);await saveFile((man.original||'export.zip').replace(/\.zip$/i,'')+'-restored.zip',plain);m.innerHTML='<span class="ok">Restored. Your original export was offered for saving.</span>';}
+ catch(err){m.innerHTML='<span class="bad">'+esc(err.code==='declined'?'You declined the save.':err.message)+'</span>';}};
+document.addEventListener('click',async e=>{const s=e.target.dataset&&e.target.dataset.save;if(!s)return;const [id,name]=s.split('|');try{await saveFile(name,$(id).value);$('dropMsg').innerHTML='<p class="ok">Saved '+esc(name)+'.</p>';}catch(err){$('dropMsg').innerHTML='<p class="bad">'+esc(err.code==='declined'?'You declined the save.':err.message)+'</p>';}});
+
+// ----- guided import from Google, Apple and Meta
+const PROV=[
+ {n:'Google',own:['google.com'],steps:['Open your Google Account’s third-party connections page (myaccount.google.com/connections, or search “third-party connections” in your Google Account).','Select “Sign in with Google” to see the apps and sites you use it with. Also check the list of apps that have access to your account.','Select all the text on the page, copy it, and paste it below.']},
+ {n:'Apple',own:['apple.com','icloud.com'],steps:['On iPhone or iPad: Settings, tap your name, then Sign-In & Security, then Apps Using Your Apple Account. Menu names vary by iOS version. On the web: sign in at account.apple.com, open Sign-In & Security, then Sign in with Apple.','Apple’s phone list is hard to copy as text, so type or paste the app names here, one per line.']},
+ {n:'Meta',own:['facebook.com','facebookmail.com','instagram.com'],steps:['In Facebook, open Settings & privacy, then Settings, then Apps and websites.','Look at the Active tab, then the Expired and Removed tabs. Old accounts are often in Expired.','Copy the text of each tab and paste it below.']}];
+const NOISE=/^(active|expired|removed|search|filter|see details|sign in with (google|apple)|third.party connections|have access to your google account|apps? using (your )?apple (id|account)|stop using.*|edit|view|remove|delete|done|settings|logged in with facebook|apps and websites|all|none|sign.?in (&|and) security|google|apple|facebook|meta)$/i;
+let cand=[];
+PROV.forEach(p=>{const d=document.createElement('div');d.className='prov';d.innerHTML='<b>'+p.n+'</b><ol class="steps">'+p.steps.map(s=>'<li>'+esc(s)+'</li>').join('')+'</ol><textarea id="imp'+p.n+'" aria-label="Paste your '+p.n+' list"></textarea><p><button class="btn" data-imp="'+p.n+'">Add accounts from '+p.n+'</button></p>';$('provs').append(d);});
+function setVia(domain,src){const a=S.accounts.find(x=>x.domain===reg(domain));if(a)a.via=[...new Set([...(a.via||[]),src])];}
+function importFrom(p,text){let added=0;const seen=new Set();
+ for(const raw of text.split(/\r?\n/)){const l=raw.trim();if(!l||l.length>60||seen.has(l.toLowerCase()))continue;seen.add(l.toLowerCase());const low=l.toLowerCase();let hit=null;
+  for(const d in K){if(p.own.includes(d))continue;const nm=K[d][0].toLowerCase().split(' / ')[0];if(low===nm||low.startsWith(nm+' ')||low.includes(d)){hit=d;break;}}
+  const u=l.match(/^(?:https?:\/\/)?((?:[\w-]+\.)+[a-z]{2,})(?:\/|$)/i);
+  if(hit){if(addAcc(hit,1))added++;setVia(hit,p.n);}
+  else if(u&&!p.own.includes(reg(u[1]))){if(addAcc(u[1],1))added++;setVia(u[1],p.n);}
+  else if(!NOISE.test(l)&&l.split(/\s+/).length<=5&&!/\d{4}|\bago\b|[:;]/.test(l)&&!cand.some(c=>c.n.toLowerCase()===low))cand.push({n:l,src:p.n});}
+ save();return added;}
+function drawCand(){$('candBox').hidden=!cand.length;$('candList').innerHTML='';cand.forEach((c,i)=>{const lb=document.createElement('label');lb.innerHTML='<input type="checkbox" data-c="'+i+'"> ';lb.append(c.n+' ('+c.src+')');$('candList').append(lb);});}
+document.addEventListener('click',e=>{const s=e.target.dataset&&e.target.dataset.imp;if(!s)return;const p=PROV.find(x=>x.n===s),t=$('imp'+s).value;
+ if(!t.trim()){$('impMsg').textContent='Paste the list from '+s+' first.';return;}
+ const n=importFrom(p,t);drawCand();$('impMsg').textContent=n+' recognised account'+(n===1?'':'s')+' added from '+s+'. '+(cand.length?'Check the other lines below.':'Open step 3 to review them.');});
+$('candAll').onclick=()=>document.querySelectorAll('#candList input').forEach(c=>c.checked=true);
+$('candAdd').onclick=()=>{const keep=[];let n=0;document.querySelectorAll('#candList input').forEach(c=>{const x=cand[+c.dataset.c];if(c.checked){const d=x.n.toLowerCase().replace(/\W+/g,'')+'.local';if(addAcc(d,0))n++;const a=S.accounts.find(y=>y.domain===reg(d));if(a){a.name=x.n;setVia(d,x.src);}}else keep.push(x);});cand=keep;save();drawCand();$('impMsg').textContent=n+' account'+(n===1?'':'s')+' added. Open step 3 to review them.';};
+drawInv();
+</script>
+</body>
+</html>
